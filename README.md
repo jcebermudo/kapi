@@ -1,6 +1,6 @@
 <img width="300" height="auto" alt="kapi-logo" src="https://github.com/user-attachments/assets/4a1e40af-e318-489f-afbd-f861a0375614" />
 
-Kapi UI is a visual commenting tool. Click on an element, leave a comment, and send to your agent. No need for copy-pasting file paths or describing your target element. 
+Kapi UI is a visual commenting tool for your coding agents. Click an element, comment, and send to your agent. No copy-pasting file paths or describing whcih element you mean.
 
 It currently works with Vue projects (Vite + Vue or Nuxt) paired with Claude Code or Codex. Support for other frameworks and agents coming soon.
 
