@@ -5,13 +5,16 @@ Kapi UI is a visual commenting tool. Click on an element, leave a comment, and s
 It currently works with Vue projects (Vite + Vue or Nuxt) paired with Claude Code or Codex. Support for other frameworks and agents coming soon.
 
 ## Requirements
+
 - A Vue project (Vite + Vue or Nuxt)
 - Claude Code/Codex CLI
 
 ## How it works
+
 At its core, Kapi UI is a Vite plugin. It injects the UI overlay into your dev app and uses the HMR websocket to send your comments to your agent. You can also opt to manually copy your comments and paste them into any coding agent of your choice.
 
 ## Automatic Installation
+
 From your project root:
 ```bash
 npx kapi-ui
@@ -27,6 +30,7 @@ npx kapi-ui --manual            # copy/paste workflow, no agent
 ```
 
 ## Manual Installation
+
 1. Install the package as a dev dependency:
 ```bash
 npm install kapi-ui -D
@@ -55,6 +59,7 @@ The `agent` option is required — use `'claude'`, `'codex'`, or `false` (copy/p
 3. Run your dev server as usual. The UI overlay is injected and your agent session starts automatically.
 
 ## Configuration
+
 The only option, on both the Vite plugin and the Nuxt module:
 
 | Option  | Type                           | Default      | What it does                                                         |
@@ -64,4 +69,5 @@ The only option, on both the Vite plugin and the Nuxt module:
 Kapi UI uses Vite's HMR websocket to start a Claude Code and Codex Sessions.
 
 ## License
+
 [MIT](https://github.com/jcebermudo/kapi-ui/blob/main/LICENSE)
