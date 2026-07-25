@@ -1,17 +1,11 @@
 <img width="300" height="auto" alt="kapi-logo" src="https://github.com/user-attachments/assets/4a1e40af-e318-489f-afbd-f861a0375614" />
 
-Kapi UI is a visual commenting tool for your coding agents. Click an element, comment, and send to your agent. No copy-pasting file paths or describing an element.
-
-It currently works with Vue projects (Vite + Vue or Nuxt) paired with Claude Code or Codex. Support for other frameworks and agents coming soon.
+Kapi UI is a commenting tool for coding agents. Click on an element, comment, and send to your agent. No copy-pasting file paths or describing an element.
 
 ## Requirements
 
 - A Vue project (Vite + Vue or Nuxt)
 - Claude Code/Codex CLI
-
-## How it works
-
-At its core, Kapi UI is a Vite plugin. It injects the UI overlay into your dev app and uses the HMR websocket to send your comments to your agent. You can also opt to manually copy your comments and paste them into any coding agent of your choice.
 
 ## Automatic Installation
 
@@ -57,6 +51,10 @@ export default defineNuxtConfig({
 The `agent` option is required — use `'claude'`, `'codex'`, or `false` (copy/paste only, no agent spawned).
 
 3. Run your dev server as usual. The UI overlay is injected and your agent session starts automatically.
+
+## How it works
+
+At its core, Kapi UI is a Vite plugin. It injects the UI overlay into your dev app and uses the HMR websocket to send your comments to your agent. You can also opt to manually copy your comments and paste them into any coding agent of your choice.
 
 ## Configuration
 
