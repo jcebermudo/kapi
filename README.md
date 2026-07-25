@@ -20,12 +20,9 @@
   <a href="https://github.com/jcebermudo/kapi-ui/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/jcebermudo/kapi-ui" /></a>
 </p>
 
-<!-- TODO: Add a short demo GIF or video here. Show:
-1. Selecting an element
-2. Writing an instruction
-3. Sending it to an agent
-4. The agent editing the correct Vue component
--->
+<p align="center">
+  <img width="642" height="480" alt="kapi-github-demo" src="https://github.com/user-attachments/assets/d5aecaed-568d-4f76-9ec3-2d2369ede45e" />
+</p>
 
 ## Quick start
 
