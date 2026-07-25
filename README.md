@@ -1,70 +1,103 @@
-<img width="300" height="auto" alt="kapi-logo" src="https://github.com/user-attachments/assets/4a1e40af-e318-489f-afbd-f861a0375614" />
+<p align="center">
+  <img
+    width="300"
+    height="auto"
+    alt="Kapi UI logo"
+    src="https://github.com/user-attachments/assets/4a1e40af-e318-489f-afbd-f861a0375614"
+  />
+</p>
 
-Kapi UI is a commenting tool for coding agents. Click on an element, comment, and send to your agent. No copy-pasting file paths or describing an element.
+<p align="center">
+  <strong>Point your coding agent at the exact component in your Vue or Nuxt app.</strong>
+</p>
 
-## Requirements
+<p align="center">
+  Click any rendered element, describe what you want changed, and send its source context directly to Claude Code or Codex.
+</p>
 
-- A Vue project (Vite + Vue or Nuxt)
-- Claude Code/Codex CLI
+<p align="center">
+  <a href="https://www.npmjs.com/package/kapi-ui"><img alt="npm version" src="https://img.shields.io/npm/v/kapi-ui" /></a>
+  <a href="https://github.com/jcebermudo/kapi-ui/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/jcebermudo/kapi-ui" /></a>
+</p>
 
-## Automatic Installation
+<!-- TODO: Add a short demo GIF or video here. Show:
+1. Selecting an element
+2. Writing an instruction
+3. Sending it to an agent
+4. The agent editing the correct Vue component
+-->
 
-From your project root:
+## Quick start
+
+Run Kapi from the root of your Vue or Nuxt project:
+
 ```bash
 npx kapi-ui
 ```
+Kapi detects your framework, adds the required integration, and starts your configured coding agent.
 
-Useful flags:
+Then run your dev server as usual and use the overlay to select and element and submit an instruction.
+
+## Supported integrations
+
+### Frameworks
+
+- Vue with Vite
+- Nuxt
+
+### Coding agents
+
+- Claude Code
+- Codex CLI
+- Any coding agent through manual copy-and-paste mode
+
+## Manual installation
+
+Install Kapi as a dev dependency:
+
 ```bash
-npx kapi-ui --vite              # force Vite + Vue setup (skip auto-detection)
-npx kapi-ui --nuxt              # force Nuxt setup
-npx kapi-ui --agent=claude      # force Claude Code
-npx kapi-ui --agent=codex       # force Codex (experimental)
-npx kapi-ui --manual            # copy/paste workflow, no agent
+npm install kapi -D
 ```
 
-## Manual Installation
+### Vite and Vue
 
-1. Install the package as a dev dependency:
-```bash
-npm install kapi-ui -D
-```
-2. Wire it into your config
+Add the Kapi plugin to `vite.config.ts`:
 
-**Vite + Vue** (`vite.config.ts`):
 ```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import kapi from 'kapi-ui/vite-plugin'
 
 export default defineConfig({
-  plugins: [kapi({ agent: 'claude' })],
+  plugins: [
+    vue(),
+    kapi({
+      agent: 'claude',
+    }),
+  ],
 })
 ```
 
-**Nuxt** (`nuxt.config.ts`):
+### Nuxt
+
 ```ts
 export default defineNuxtConfig({
   modules: ['kapi-ui/nuxt'],
-  kapi: { agent: 'claude' },
-  })
+
+  kapi: {
+    agent: 'claude',
+  },
+})
 ```
-
-The `agent` option is required — use `'claude'`, `'codex'`, or `false` (copy/paste only, no agent spawned).
-
-3. Run your dev server as usual. The UI overlay is injected and your agent session starts automatically.
-
-## How it works
-
-At its core, Kapi UI is a Vite plugin. It injects the UI overlay into your dev app and uses the HMR websocket to send your comments to your agent. You can also opt to manually copy your comments and paste them into any coding agent of your choice.
 
 ## Configuration
 
-The only option, on both the Vite plugin and the Nuxt module:
+The required `agent` option accepts:
+```ts
+'claude' | 'codex' | false
+```
 
-| Option  | Type                           | Default      | What it does                                                         |
-| ------- | ------------------------------ | ------------ | -------------------------------------------------------------------- |
-| `agent` | `'claude' \| 'codex' \| false` | — (required) | Which agent Kapi drives. `false` = copy/paste only, no agent spawned |
-
-Kapi UI uses Vite's HMR websocket to start a Claude Code and Codex Sessions.
+Use `false` to enable manual copy-and-paste mode without starting an agent session.
 
 ## License
 
