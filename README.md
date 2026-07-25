@@ -77,6 +77,8 @@ export default defineConfig({
 
 ### Nuxt
 
+Add the Kapi plugin to `nuxt.config.ts`:
+
 ```ts
 export default defineNuxtConfig({
   modules: ['kapi-ui/nuxt'],
