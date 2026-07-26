@@ -98,6 +98,13 @@ The required `agent` option accepts:
 
 Use `false` to enable manual copy-and-paste mode without starting an agent session.
 
+## Shortcuts
+
+| Action | Shortcut |
+|---|---|
+| Select multiple elements | Drag-select across the elements, **or** hold `Shift` and click each element individually |
+| Exit comment mode | Press `Esc` to stop composing and exit comment mode |
+
 ## License
 
 [MIT](https://github.com/jcebermudo/kapi-ui/blob/main/LICENSE)
