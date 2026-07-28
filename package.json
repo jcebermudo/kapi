@@ -3,7 +3,8 @@
   "version": "0.3.6",
   "description": "Visually prompt your UI",
   "scripts": {
-    "build": "tsc && npm run copy:css && vite build -c vite.overlay.config.ts",
+    "build": "tsc && npm run copy:css && npm run build:overlay",
+    "build:overlay": "vite build --config vite.overlay.config.ts",
     "copy:css": "mkdir -p dist/browser/styles && cp src/browser/styles/*.css dist/browser/styles/",
     "dev": "npm run copy:css && (node -e \"require('fs').watch('src/browser/styles',()=>require('child_process').execSync('npm run copy:css'))\" & tsc --watch --preserveWatchOutput)",
     "prepublishOnly": "npm run build"
@@ -44,7 +45,6 @@
   },
   "dependencies": {
     "@nuxt/kit": "^4.4.8",
-    "bippy": "^0.6.1",
     "estree-walker": "^2.0.2",
     "magic-string": "^0.30.21",
     "magicast": "^0.5.3",

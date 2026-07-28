@@ -1,5 +1,5 @@
 import type { ComponentInfo, ElementLocation } from './types.js'
-import { getSourceLocation, getComponentInfo, warmSource } from './adapter.js'
+import { getSourceLocation, getComponentInfo, warmSource } from './resolver.js'
 
 const HIGHLIGHT_COLOR = '34, 197, 94' // green-500, as an rgb triplet for reuse in rgba()
 const SELECTION_COLOR = '34, 197, 94' // green-500, matches single-select highlight; for multi-select outlines/marquee
@@ -282,19 +282,6 @@ function buildSelectorPath(el: Element): string {
   return parts.join(' > ') || el.tagName.toLowerCase()
 }
 
-// Most elements resolve directly via `el.__vnode` (see trace-record.ts). The
-// ancestor walk below exists for the elements that can't: plain text nodes
-// (no vnode at all), `_createStaticVNode` content (raw innerHTML — Vue never
-// creates individual vnodes for its inner elements), and vnodes Vue cloned
-// *with* extra props (`cloneVNode(vnode, extraProps)` builds a fresh `props`
-// object via `mergeProps`, breaking the WeakMap identity link — a clone with
-// no extraProps reuses the same `props` reference and resolves directly).
-// In all of these, the nearest traced ancestor is the best available
-// approximation.
-// Re-exported so existing importers (comments.ts, hover-panel.ts) keep a stable
-// path; the implementations now live in the framework adapter (adapter.ts).
-export { getSourceLocation, getComponentInfo, warmSource }
-
 // Shared by the hover panel and comment tooltips, which both render a
 // `<ComponentName>` badge but style it with their own class.
 export function renderComponentBadge(component: ComponentInfo, className: string): HTMLDivElement {
@@ -358,6 +345,13 @@ function handlePointerMove(e: PointerEvent) {
   hoveredEl = el
   paintHighlight(el)
   onHover?.(el)
+  // Async source (React 19 needs Next symbolication) isn't ready for the paint
+  // above. Warm it, then re-fire the hover callback so the panel fills in the
+  // resolved source without the user re-hovering. Ignore stale resolves (the
+  // pointer already moved to another element). Instant for sync frameworks.
+  void warmSource(el).then(() => {
+    if (el === hoveredEl) onHover?.(el)
+  })
 }
 
 export function setOnHover(callback: (el: Element | null) => void) {

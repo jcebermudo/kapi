@@ -2,8 +2,6 @@ import {
   lockHighlightOn,
   unlockHighlight,
   clearHighlightIfNotInspecting,
-  getSourceLocation,
-  getComponentInfo,
   renderComponentBadge,
   isDisabled,
   clearSelection,
@@ -12,6 +10,7 @@ import {
   previewElements,
   clearPreview,
 } from './inspector.js'
+import { getSourceLocation, getComponentInfo } from './resolver.js'
 import { ARROW_SVG, DELETE_SVG } from './icons.js'
 import type { CommentEntry, CommentTarget, ComponentInfo, Draft, SourceLocation, StoredComment } from './types.js'
 import STYLES from './styles/comments.css?inline'
