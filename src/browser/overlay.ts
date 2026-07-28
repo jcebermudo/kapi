@@ -1,4 +1,4 @@
-import { startInspecting, stopInspecting, setOnHover, setOnElementClick, setOnSelectionChange, setDisabled } from './inspector.js'
+import { startInspecting, stopInspecting, setOnHover, setOnElementClick, setOnSelectionChange, setDisabled, warmSource } from './inspector.js'
 import { updateHoverPanel, showProcessingStatus } from './hover-panel.js'
 import { beginComment, updateSelection, clearAllComments, cancelOpenDraft, buildAllCommentsPrompt } from './comments.js'
 import { connectSocket, sendComments, stopComments, setOnCommentsDone, setOnCommentsError, setOnCommentsProcessing } from './socket.js'
@@ -136,8 +136,16 @@ export function insertOverlay() {
   document.body.appendChild(host)
 
   // 3. Connect the overlay to the element inspector.
+  let hoveredForSource: Element | null = null
   setOnHover((el) => {
+    hoveredForSource = el
     updateHoverPanel(el)
+    // React 19 resolves source asynchronously (source-map symbolication), so the
+    // paint above has no file:line:col yet. Warm the cache, then repaint once it
+    // lands — but only if the pointer is still on the same element.
+    if (el) warmSource(el).then(() => {
+      if (el === hoveredForSource) updateHoverPanel(el)
+    })
   })
 
   setOnElementClick((el, clientX, clientY) => {
