@@ -16,8 +16,15 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/kapi-ui"><img alt="npm version" src="https://img.shields.io/npm/v/kapi-ui" /></a>
-  <a href="https://github.com/jcebermudo/kapi-ui/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/jcebermudo/kapi-ui" /></a>
+  <a href="https://www.npmjs.com/package/kapi-ui">
+    <img alt="npm version" src="https://img.shields.io/npm/v/kapi-ui" />
+  </a>
+  <a href="https://www.npmjs.com/package/kapi-ui">
+    <img alt="npm downloads" src="https://img.shields.io/npm/dt/kapi-ui" />
+  </a>
+  <a href="https://github.com/jcebermudo/kapi-ui/blob/main/LICENSE">
+    <img alt="MIT License" src="https://img.shields.io/github/license/jcebermudo/kapi-ui" />
+  </a>
 </p>
 
 <p align="center">
